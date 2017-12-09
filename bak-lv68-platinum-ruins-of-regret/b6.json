@@ -1,0 +1,732 @@
+{
+  "tiles": [
+    {
+      "x": -1,
+      "y": 0,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": "↑",
+      "comment": "To B6"
+    },
+    {
+      "x": -1,
+      "y": 1,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "up": false,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "up": false,
+      "down": true,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 3,
+      "y": -1,
+      "up": false,
+      "down": true,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 4,
+      "y": -1,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "up": false,
+      "down": false,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "up": true,
+      "down": false,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "up": false,
+      "down": false,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": -2,
+      "y": 0,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -2,
+      "y": 1,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -3,
+      "y": 1,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -3,
+      "y": 0,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -3,
+      "y": -1,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": -4,
+      "y": 0,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -4,
+      "y": -1,
+      "up": true,
+      "down": true,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -3,
+      "y": -2,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": -4,
+      "y": -2,
+      "up": false,
+      "down": true,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -3,
+      "y": -3,
+      "up": true,
+      "down": true,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -2,
+      "y": -3,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": -3,
+      "y": -4,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -2,
+      "y": -4,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": -4,
+      "y": -4,
+      "up": true,
+      "down": false,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -2,
+      "y": -5,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": "C",
+      "comment": "Magic water"
+    },
+    {
+      "x": -2,
+      "y": -6,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -1,
+      "y": -6,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 0,
+      "y": -6,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 1,
+      "y": -6,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 2,
+      "y": -6,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 3,
+      "y": -6,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 3,
+      "y": -5,
+      "up": true,
+      "down": true,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 4,
+      "y": -5,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 4,
+      "y": -6,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 5,
+      "y": -6,
+      "up": false,
+      "down": false,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 4,
+      "y": -7,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 4,
+      "y": -8,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 3,
+      "y": -8,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 3,
+      "y": -7,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 2,
+      "y": -7,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 2,
+      "y": -8,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 1,
+      "y": -7,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 1,
+      "y": -8,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 0,
+      "y": -7,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 0,
+      "y": -8,
+      "up": false,
+      "down": true,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -1,
+      "y": -7,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -2,
+      "y": -7,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -3,
+      "y": -7,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -3,
+      "y": -8,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": -4,
+      "y": -8,
+      "up": false,
+      "down": true,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -4,
+      "y": -7,
+      "up": true,
+      "down": true,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -4,
+      "y": -6,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -3,
+      "y": -6,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -4,
+      "y": -5,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": "↓",
+      "comment": "To B7"
+    },
+    {
+      "x": -3,
+      "y": -5,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -5,
+      "y": -5,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -5,
+      "y": -6,
+      "up": false,
+      "down": true,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -6,
+      "y": -5,
+      "up": false,
+      "down": false,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -5,
+      "y": 0,
+      "up": false,
+      "down": true,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -5,
+      "y": 1,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": "C",
+      "comment": "Ethereal stone"
+    },
+    {
+      "x": -4,
+      "y": 1,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -5,
+      "y": 2,
+      "up": true,
+      "down": false,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -3,
+      "y": 2,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": -4,
+      "y": 2,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -4,
+      "y": 3,
+      "up": true,
+      "down": false,
+      "left": false,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": -6,
+      "y": 1,
+      "up": false,
+      "down": false,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 4,
+      "y": -4,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 3,
+      "y": -4,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 4,
+      "y": -3,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 3,
+      "y": -3,
+      "up": true,
+      "down": false,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 2,
+      "y": -4,
+      "up": false,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 1,
+      "y": -4,
+      "up": false,
+      "down": false,
+      "left": false,
+      "right": true,
+      "label": ""
+    }
+  ],
+  "scrollX": -10,
+  "scrollY": -9,
+  "selectedX": -10,
+  "selectedY": -8
+}

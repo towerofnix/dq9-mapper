@@ -1,0 +1,143 @@
+{
+  "tiles": [
+    {
+      "x": -1,
+      "y": 0,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": "↑"
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -2,
+      "y": 0,
+      "up": true,
+      "down": false,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": -1,
+      "y": -1,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 0,
+      "y": -1,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 1,
+      "y": -1,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 2,
+      "y": -1,
+      "up": false,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 3,
+      "y": -1,
+      "up": false,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 4,
+      "y": -1,
+      "up": false,
+      "down": false,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 5,
+      "y": -1,
+      "up": false,
+      "down": true,
+      "left": true,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 6,
+      "y": -1,
+      "up": true,
+      "down": true,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "up": true,
+      "down": false,
+      "left": false,
+      "right": true,
+      "label": ""
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "up": true,
+      "down": false,
+      "left": true,
+      "right": false,
+      "label": ""
+    },
+    {
+      "x": 6,
+      "y": -2,
+      "up": false,
+      "down": true,
+      "left": false,
+      "right": false,
+      "label": ""
+    }
+  ],
+  "scrollX": -9,
+  "scrollY": -3,
+  "selectedX": -1,
+  "selectedY": -2
+}

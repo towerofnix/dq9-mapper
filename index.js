@@ -7,6 +7,7 @@ const CancelDialog = require('./ui-lib/ui/form/CancelDialog')
 const CommandLineInterfacer = require('./ui-lib/util/CommandLineInterfacer')
 const Dialog = require('./ui-lib/ui/Dialog')
 const DisplayElement = require('./ui-lib/ui/DisplayElement')
+const Flushable = require('./ui-lib/util/Flushable')
 const FocusElement = require('./ui-lib/ui/form/FocusElement')
 const Form = require('./ui-lib/ui/form/Form')
 const Label = require('./ui-lib/ui/Label')
@@ -202,21 +203,21 @@ class MapCanvas extends FocusElement {
       this.selectedX--
     } else if (telc.isRight(keyBuf)) {
       this.selectedX++
-    } else if (telc.isShiftUp(keyBuf)) {
+    } else if (telc.isShiftUp(keyBuf) || keyBuf.toString() === 'w') {
       this.createSelectedTile()
       this.selectedTile.up = !this.selectedTile.up
-    } else if (telc.isShiftDown(keyBuf)) {
+    } else if (telc.isShiftDown(keyBuf) || keyBuf.toString() === 'z') {
       this.createSelectedTile()
       this.selectedTile.down = !this.selectedTile.down
-    } else if (telc.isShiftLeft(keyBuf)) {
+    } else if (telc.isShiftLeft(keyBuf) || keyBuf.toString() === 'a') {
       this.createSelectedTile()
       this.selectedTile.left = !this.selectedTile.left
-    } else if (telc.isShiftRight(keyBuf)) {
+    } else if (telc.isShiftRight(keyBuf) || keyBuf.toString() === 's') {
       this.createSelectedTile()
       this.selectedTile.right = !this.selectedTile.right
     } else if (telc.isSelect(keyBuf)) {
       this.createSelectedTile()
-    } else if (telc.isBackspace(keyBuf)) {
+    } else if (telc.isBackspace(keyBuf) || keyBuf.toString() === 'x') {
       if (this.selectedTile) {
         if (this.selectedTile.label) {
           this.selectedTile.label = ''
@@ -411,7 +412,11 @@ class FilePickerForm extends ListScrollForm {
           })
         }))
 
-        const sort = naturalSort()
+        const sort = naturalSort({
+          properties: {
+            caseSensitive: false
+          }
+        })
         processedItems.sort((a, b) => {
           if (a.isDirectory === b.isDirectory) {
             return sort(a.label, b.label)
@@ -439,6 +444,7 @@ class FilePickerForm extends ListScrollForm {
 
           itemButton.on('pressed', () => {
             if (item.isDirectory) {
+              this.emit('browsingDirectory', item.path)
               this.fillItems(item.path)
             } else {
               this.emit('selected', item.path)
@@ -446,8 +452,8 @@ class FilePickerForm extends ListScrollForm {
           })
         }
 
-        this.fixLayout()
         this.firstInput()
+        this.fixLayout()
       },
       () => {
         button.text = 'Failed to read path! (Cancel)'
@@ -458,6 +464,7 @@ class FilePickerForm extends ListScrollForm {
   }
 }
 
+/*
 class FilePickerDialog extends Dialog {
   constructor(title = 'Pick file', dir = __dirname) {
     super()
@@ -499,6 +506,106 @@ class FilePickerDialog extends Dialog {
     this.filePickerForm.y = 1
     this.filePickerForm.w = this.pane.contentW
     this.filePickerForm.h = this.pane.contentH - this.filePickerForm.y
+  }
+}
+*/
+
+class OpenFileDialog extends Dialog {
+  constructor() {
+    super()
+
+    this.form = new Form()
+    this.pane.addChild(this.form)
+
+    this.filePathLabel = new Label('Enter file path:')
+    this.filePathInput = new TextInput()
+    this.openButton = new Button('Open')
+    this.cancelButton = new Button('Cancel')
+
+    this.filePickerForm = new FilePickerForm()
+    this.filePickerForm.captureTab = false
+
+    this.form.addChild(this.filePathLabel)
+    this.form.addInput(this.filePathInput)
+    this.form.addInput(this.filePickerForm)
+    this.form.addInput(this.openButton)
+    this.form.addInput(this.cancelButton)
+
+    this._resolve = null
+
+    this.openButton.on('pressed', () => {
+      this._resolve(this.filePathInput.value)
+    })
+
+    this.filePathInput.on('value', () => {
+      this._resolve(this.filePathInput.value)
+    })
+
+    {
+      const cb = append => p => {
+        this.filePathInput.setValue((path.relative(__dirname, p) || '.') + append)
+      }
+
+      this.filePickerForm.on('selected', cb(''))
+      this.filePickerForm.on('browsingDirectory', cb('/'))
+    }
+
+    this.cancelButton.on('pressed', () => {
+      this._resolve(null)
+    })
+
+    const dir = (this.lastFilePath
+      ? path.relative(__dirname, path.dirname(this.lastFilePath)) + '/'
+      : './')
+
+    this.filePathInput.setValue(dir)
+    this.filePickerForm.fillItems(dir)
+  }
+
+  fixLayout() {
+    super.fixLayout()
+
+    this.pane.w = Math.min(this.contentW, 40)
+    this.pane.h = Math.min(this.contentH, 20)
+    this.pane.centerInParent()
+
+    this.form.w = this.pane.contentW
+    this.form.h = this.pane.contentH
+
+    this.filePathLabel.x = 0
+    this.filePathLabel.y = 0
+
+    this.filePathInput.x = this.filePathLabel.right + 2
+    this.filePathInput.y = this.filePathLabel.y
+    this.filePathInput.w = this.form.contentW - this.filePathInput.x
+
+    this.filePickerForm.x = 0
+    this.filePickerForm.y = this.filePathInput.y + 2
+    this.filePickerForm.w = this.form.contentW
+    this.filePickerForm.h = this.form.contentH - this.filePickerForm.y - 2
+
+    this.openButton.x = 0
+    this.openButton.y = this.form.contentH - 1
+
+    this.cancelButton.x = this.openButton.right + 2
+    this.cancelButton.y = this.openButton.y
+  }
+
+  focused() {
+    this.form.firstInput()
+  }
+
+  go() {
+    this.visible = true
+    this.root.select(this)
+
+    return new Promise(resolve => {
+      this._resolve = resolve
+    }).then(filePath => {
+      this.visible = false
+      this.lastFilePath = filePath
+      return filePath
+    })
   }
 }
 
@@ -555,18 +662,11 @@ class AppElement extends FocusElement {
       this.mapCanvas.emit('gotComment', this.mapCanvas.selectedTile.comment)
     })
 
-    this.filePickerDialog = new FilePickerDialog()
-    this.filePickerDialog.visible = false
-    this.addChild(this.filePickerDialog)
+    this.openFileDialog = new OpenFileDialog()
+    this.openFileDialog.visible = false
+    this.addChild(this.openFileDialog)
 
-    readFile(saveFilePath).then(
-      () => {
-        this.openFile(saveFilePath)
-      },
-      () => {
-        this.editingFileLabel.text = 'New file: ' + path.relative(__dirname, saveFilePath)
-        this.saveFilePath = saveFilePath
-      })
+    this.saveFileSelected(saveFilePath)
   }
 
   fixLayout() {
@@ -601,11 +701,28 @@ class AppElement extends FocusElement {
         }
       )
     } else if (keyBuf[0] === 15) { // ^O
-      this.filePickerDialog.browse()
-        .then(filePath => this.openFile(filePath))
+      this.openFileDialog.go().then(filePath => {
+        if (filePath) {
+          this.saveFileSelected(filePath)
+        } else {
+          this.root.select(this)
+        }
+      })
     } else {
       super.keyPressed(keyBuf)
     }
+  }
+
+  saveFileSelected(saveFilePath) {
+    readFile(saveFilePath).then(
+      () => {
+        this.openFile(saveFilePath)
+      },
+      () => {
+        this.editingFileLabel.text = 'New file: ' + path.relative(__dirname, saveFilePath)
+        this.saveFilePath = saveFilePath
+        this.root.select(this)
+      })
   }
 
   async openFile(filePath) {
@@ -637,7 +754,7 @@ class AppElement extends FocusElement {
       this.restoreEditingFileMessage()
     }
 
-    this.root.select(this.mapCanvas)
+    this.root.select(this)
   }
 
   restoreEditingFileMessage() {
@@ -652,7 +769,7 @@ class AppElement extends FocusElement {
     return new Promise(resolve => {
       dialog.once('cancelled', () => {
         this.removeChild(dialog)
-        this.root.select(this.mapCanvas)
+        this.root.select(this)
         resolve()
       })
     })
@@ -676,6 +793,13 @@ class AppElement extends FocusElement {
 const interfacer = new CommandLineInterfacer()
 
 interfacer.getScreenSize().then(size => {
+  const flushable = new Flushable(process.stdout, true)
+
+  flushable.screenLines = size.height
+  flushable.screenCols = size.cols
+  flushable.write(ansi.clearScreen())
+  flushable.flush()
+
   const root = new Root(interfacer)
   root.w = size.width
   root.h = size.height
@@ -689,7 +813,10 @@ interfacer.getScreenSize().then(size => {
     process.exit(0)
   })
 
-  setInterval(() => root.render(), 100)
+  setInterval(() => {
+    root.renderTo(flushable)
+    flushable.flush()
+  }, 100)
 }).catch(error => {
   console.error(error)
   process.exit(1)
