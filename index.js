@@ -797,6 +797,7 @@ interfacer.getScreenSize().then(size => {
 
   flushable.screenLines = size.height
   flushable.screenCols = size.cols
+  flushable.shouldShowCompressionStatistics = true
   flushable.write(ansi.clearScreen())
   flushable.flush()
 
