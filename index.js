@@ -797,7 +797,7 @@ interfacer.getScreenSize().then(size => {
 
   flushable.screenLines = size.height
   flushable.screenCols = size.cols
-  flushable.shouldShowCompressionStatistics = true
+  flushable.shouldShowCompressionStatistics = process.argv.includes('--show-ansi-stats')
   flushable.write(ansi.clearScreen())
   flushable.flush()
 
@@ -805,7 +805,11 @@ interfacer.getScreenSize().then(size => {
   root.w = size.width
   root.h = size.height
 
-  const appElement = new AppElement(process.argv[2] || 'save.json')
+  const appElement = new AppElement(
+    (process.argv[2] && process.argv[2][0] !== '-')
+    ? process.argv[2]
+    : 'save.json')
+
   root.addChild(appElement)
   root.select(appElement)
   root.fixAllLayout()
