@@ -203,16 +203,16 @@ class MapCanvas extends FocusElement {
       this.selectedX--
     } else if (telc.isRight(keyBuf)) {
       this.selectedX++
-    } else if (telc.isShiftUp(keyBuf) || keyBuf.toString() === 'w') {
+    } else if (telc.isShiftUp(keyBuf) || telc.compareBufStr(keyBuf, 'w')) {
       this.createSelectedTile()
       this.selectedTile.up = !this.selectedTile.up
-    } else if (telc.isShiftDown(keyBuf) || keyBuf.toString() === 'z') {
+    } else if (telc.isShiftDown(keyBuf) || telc.compareBufStr(keyBuf, 's')) {
       this.createSelectedTile()
       this.selectedTile.down = !this.selectedTile.down
-    } else if (telc.isShiftLeft(keyBuf) || keyBuf.toString() === 'a') {
+    } else if (telc.isShiftLeft(keyBuf) || telc.compareBufStr(keyBuf, 'a')) {
       this.createSelectedTile()
       this.selectedTile.left = !this.selectedTile.left
-    } else if (telc.isShiftRight(keyBuf) || keyBuf.toString() === 's') {
+    } else if (telc.isShiftRight(keyBuf) || telc.compareBufStr(keyBuf, 'd')) {
       this.createSelectedTile()
       this.selectedTile.right = !this.selectedTile.right
     } else if (telc.isSelect(keyBuf)) {
