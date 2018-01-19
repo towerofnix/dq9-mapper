@@ -464,52 +464,6 @@ class FilePickerForm extends ListScrollForm {
   }
 }
 
-/*
-class FilePickerDialog extends Dialog {
-  constructor(title = 'Pick file', dir = __dirname) {
-    super()
-
-    this.titleLabel = new Label(title)
-    this.pane.addChild(this.titleLabel)
-
-    this.filePickerForm = new FilePickerForm()
-    this.pane.addChild(this.filePickerForm)
-
-    this.lastDirectory = __dirname
-  }
-
-  browse(directory = this.lastDirectory) {
-    this.visible = true
-    this.filePickerForm.fillItems(directory)
-    this.root.select(this.filePickerForm)
-
-    return new Promise(resolve => {
-      this.filePickerForm.on('selected', itemPath => {
-        this.lastDirectory = path.dirname(itemPath)
-        this.visible = false
-        resolve(itemPath)
-      })
-    })
-  }
-
-  fixLayout() {
-    super.fixLayout()
-
-    this.pane.w = Math.min(40, this.contentW)
-    this.pane.h = Math.min(14, this.contentH)
-    this.pane.centerInParent()
-
-    this.titleLabel.centerInParent()
-    this.titleLabel.y = 0
-
-    this.filePickerForm.x = 0
-    this.filePickerForm.y = 1
-    this.filePickerForm.w = this.pane.contentW
-    this.filePickerForm.h = this.pane.contentH - this.filePickerForm.y
-  }
-}
-*/
-
 class OpenFileDialog extends Dialog {
   constructor() {
     super()
