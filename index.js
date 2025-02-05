@@ -2,31 +2,54 @@
 
 'use strict'
 
-const Button = require('./ui-lib/ui/form/Button')
-const CancelDialog = require('./ui-lib/ui/form/CancelDialog')
-const CommandLineInterfacer = require('./ui-lib/util/CommandLineInterfacer')
-const Dialog = require('./ui-lib/ui/Dialog')
-const DisplayElement = require('./ui-lib/ui/DisplayElement')
-const Flushable = require('./ui-lib/util/Flushable')
-const FocusElement = require('./ui-lib/ui/form/FocusElement')
-const Form = require('./ui-lib/ui/form/Form')
-const Label = require('./ui-lib/ui/Label')
-const ListScrollForm = require('./ui-lib/ui/form/ListScrollForm')
-const Root = require('./ui-lib/ui/Root')
-const TextInput = require('./ui-lib/ui/form/TextInput')
-const Pane = require('./ui-lib/ui/Pane')
-const ansi = require('./ui-lib/util/ansi')
-const telc = require('./ui-lib/util/telchars')
-const unic = require('./ui-lib/util/unichars')
-const fs = require('fs')
+const {
+  readFile,
+  writeFile,
+  readdir,
+  stat,
+} = require('fs/promises')
+
 const naturalSort = require('node-natural-sort')
 const path = require('path')
-const util = require('util')
 
-const readFile = util.promisify(fs.readFile)
-const writeFile = util.promisify(fs.writeFile)
-const readdir = util.promisify(fs.readdir)
-const stat = util.promisify(fs.stat)
+const {
+  ui: {
+    controls: {
+      Button,
+      Form,
+      ListScrollForm,
+      TextInput,
+    },
+
+    dialogs: {
+      CancelDialog,
+      Dialog,
+    },
+
+    presentation: {
+      Label,
+      Pane,
+    },
+
+    primitives: {
+      DisplayElement,
+      FocusElement,
+      Root,
+    },
+  },
+
+  util: {
+    ansi,
+
+    telchars: telc,
+    unichars: unic,
+
+    interfaces: {
+      CommandLineInterface,
+      Flushable,
+    },
+  },
+} = require('tui-lib')
 
 process.on('unhandledRejection', error => {
   console.error(error.stack)
@@ -203,20 +226,25 @@ class MapCanvas extends FocusElement {
       this.selectedX--
     } else if (telc.isRight(keyBuf)) {
       this.selectedX++
-    } else if (telc.isShiftUp(keyBuf) || telc.compareBufStr(keyBuf, 'w')) {
+    } else if (telc.isShiftUp(keyBuf) || keyBuf.toString() === 'w') {
       this.createSelectedTile()
       this.selectedTile.up = !this.selectedTile.up
-    } else if (telc.isShiftDown(keyBuf) || telc.compareBufStr(keyBuf, 's')) {
+      this.scheduleDrawWithoutPropertyChange()
+    } else if (telc.isShiftDown(keyBuf) || keyBuf.toString() === 's') {
       this.createSelectedTile()
       this.selectedTile.down = !this.selectedTile.down
-    } else if (telc.isShiftLeft(keyBuf) || telc.compareBufStr(keyBuf, 'a')) {
+      this.scheduleDrawWithoutPropertyChange()
+    } else if (telc.isShiftLeft(keyBuf) || keyBuf.toString() === 'a') {
       this.createSelectedTile()
       this.selectedTile.left = !this.selectedTile.left
-    } else if (telc.isShiftRight(keyBuf) || telc.compareBufStr(keyBuf, 'd')) {
+      this.scheduleDrawWithoutPropertyChange()
+    } else if (telc.isShiftRight(keyBuf) || keyBuf.toString() === 'd') {
       this.createSelectedTile()
       this.selectedTile.right = !this.selectedTile.right
+      this.scheduleDrawWithoutPropertyChange()
     } else if (telc.isSelect(keyBuf)) {
       this.createSelectedTile()
+      this.scheduleDrawWithoutPropertyChange()
     } else if (telc.isBackspace(keyBuf) || keyBuf.toString() === 'x') {
       if (this.selectedTile) {
         if (this.selectedTile.label) {
@@ -226,6 +254,7 @@ class MapCanvas extends FocusElement {
         } else {
           this.tiles.splice(this.tiles.indexOf(this.selectedTile), 1)
         }
+        this.scheduleDrawWithoutPropertyChange()
       }
     } else if (keyBuf[0] === 'l'.charCodeAt(0)) {
       this.createSelectedTile()
@@ -272,6 +301,15 @@ class MapCanvas extends FocusElement {
   get selectedTile() {
     return this.tiles.find(({ x, y }) => x === this.selectedX && y === this.selectedY)
   }
+
+  get scrollX() { return this.getDep('scrollX') }
+  set scrollX(v) { return this.setDep('scrollX', v) }
+  get scrollY() { return this.getDep('scrollY') }
+  set scrollY(v) { return this.setDep('scrollY', v) }
+  get selectedX() { return this.getDep('selectedX') }
+  set selectedX(v) { return this.setDep('selectedX', v) }
+  get selectedY() { return this.getDep('selectedY') }
+  set selectedY(v) { return this.setDep('selectedY', v) }
 }
 
 class MapLabelDialog extends Dialog {
@@ -744,9 +782,9 @@ class AppElement extends FocusElement {
   }
 }
 
-const interfacer = new CommandLineInterfacer()
+const clInterface = new CommandLineInterface()
 
-interfacer.getScreenSize().then(size => {
+clInterface.getScreenSize().then(size => {
   const flushable = new Flushable(process.stdout, true)
 
   flushable.screenLines = size.height
@@ -755,7 +793,7 @@ interfacer.getScreenSize().then(size => {
   flushable.write(ansi.clearScreen())
   flushable.flush()
 
-  const root = new Root(interfacer)
+  const root = new Root(clInterface)
   root.w = size.width
   root.h = size.height
 

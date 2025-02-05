@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "iac": "^1.1.0",
-    "node-natural-sort": "^0.8.6"
+    "node-natural-sort": "^0.8.6",
+    "tui-lib": "^0.4.1"
   }
 }
